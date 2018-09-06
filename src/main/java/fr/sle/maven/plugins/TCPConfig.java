@@ -1,0 +1,32 @@
+package fr.sle.maven.plugins;
+
+/**
+ * Plugin configuration for TCP.
+ *
+ * @author slemoine
+ */
+public class TCPConfig implements MojoConnectionConfig {
+
+    private String host;
+
+    private Integer port;
+
+    private int priority;
+
+    public String getHost() {
+        return host;
+    }
+
+    public Integer getPort() {
+        return port;
+    }
+
+    public int getPriority() {
+        return priority;
+    }
+
+    @Override
+    public Service generateService(){
+        return new TCPService(host, port);
+    }
+}
