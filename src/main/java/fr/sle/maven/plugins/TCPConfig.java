@@ -13,14 +13,6 @@ public class TCPConfig implements MojoConnectionConfig {
 
     private int priority;
 
-    public String getHost() {
-        return host;
-    }
-
-    public Integer getPort() {
-        return port;
-    }
-
     public int getPriority() {
         return priority;
     }

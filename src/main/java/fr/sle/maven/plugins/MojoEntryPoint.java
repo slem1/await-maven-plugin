@@ -13,7 +13,6 @@ import java.util.Set;
 import java.util.TreeSet;
 
 /**
- *
  * The plugin entry point. Retrieves the plugin configuration and runs the underlying tasks.
  *
  * @author slemoine
@@ -37,23 +36,26 @@ public class MojoEntryPoint extends AbstractMojo {
     private List<HttpConfig> httpz;
 
     @Parameter
-    private  PollingConfig poll;
+    private PollingConfig poll;
 
     //for unit testing
-    public void setTcps(List<TCPConfig> tcps) {
+    void setTcps(List<TCPConfig> tcps) {
         this.tcps = tcps;
     }
 
     //for unit testing
-    public void setHttpz(List<HttpConfig> httpz) {
+    void setHttpz(List<HttpConfig> httpz) {
         this.httpz = httpz;
     }
 
     //for unit testing
-    public void setPoll(PollingConfig pollingConfig){
+    void setPoll(PollingConfig pollingConfig) {
         this.poll = pollingConfig;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     public void execute() throws MojoFailureException, MojoExecutionException {
 
         List<MojoConnectionConfig> configs = new ArrayList<>();

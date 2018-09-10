@@ -1,18 +1,17 @@
 package fr.sle.maven.plugins;
 
 /**
- *
- * Interface implemented by classes responsible for checking the availability of service
+ * Interface implemented by classes responsible for checking the availability of service.
  *
  * @author slemoine
  */
 public interface Service {
 
     /**
-     * Checks if a service is available. Throws {@link ServiceUnavailableException} if the service
+     * Try to connect to the service. Throws {@link ServiceUnavailableException} if the service
      * is unavailable. Otherwise, exit normally.
      *
-     * @throws ServiceUnavailableException
+     * @throws ServiceUnavailableException if the service cannot be reached or is not ready.
      */
     void execute() throws ServiceUnavailableException;
 }

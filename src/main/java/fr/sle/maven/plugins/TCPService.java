@@ -21,6 +21,12 @@ public class TCPService implements Service {
 
     private final SocketAddress socketAddress;
 
+    /**
+     * Create new instance configured with {@code host} and {@code port}.
+     *
+     * @param host the host of the tcp service
+     * @param port the port
+     */
     public TCPService(final String host, final Integer port) {
 
         if (port == null) {
@@ -38,7 +44,7 @@ public class TCPService implements Service {
     }
 
     @Override
-    public String toString(){
+    public String toString() {
         return String.format("%s:%d (TCP)", host, port);
     }
 

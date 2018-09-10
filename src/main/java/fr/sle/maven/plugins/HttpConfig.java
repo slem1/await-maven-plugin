@@ -3,7 +3,7 @@ package fr.sle.maven.plugins;
 import java.net.URL;
 
 /**
- * Plugin configuration POJO for http service
+ * Plugin configuration POJO for http service.
  *
  * @author slemoine
  */
@@ -14,14 +14,6 @@ public class HttpConfig implements MojoConnectionConfig {
     private int statusCode;
 
     private int priority;
-
-    public URL getUrl() {
-        return url;
-    }
-
-    public int getStatusCode() {
-        return statusCode;
-    }
 
     public int getPriority() {
         return priority;

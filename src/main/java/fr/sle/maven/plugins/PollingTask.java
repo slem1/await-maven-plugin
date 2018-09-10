@@ -6,7 +6,7 @@ import org.apache.maven.plugin.logging.Log;
 import org.apache.maven.plugin.logging.SystemStreamLog;
 
 /**
- * Adds the polling logic to a {@link Service} execution
+ * Adds the polling logic to a {@link Service} execution.
  *
  * @author slemoine
  */
@@ -22,6 +22,14 @@ public class PollingTask {
 
     private final Service service;
 
+    /**
+     * Configure the polling runner for the service {@code service}.
+     *
+     * @param service    the service to run.
+     * @param maxAttempt the maximum number of attempts to run a service.
+     * @param waitTime   the waiting time between two attempts.
+     * @param priority   the priority of the this task.
+     */
     PollingTask(final Service service, int maxAttempt, final int waitTime, final int priority) {
 
         if (service == null) {
@@ -38,10 +46,21 @@ public class PollingTask {
         this.priority = priority;
     }
 
+    /**
+     * Returns the priority of the task.
+     *
+     * @return the priority value. The lesser the value is, the higher the task priority is.
+     */
     public int getPriority() {
         return priority;
     }
 
+    /**
+     * Start the polling of the {@code service}.
+     *
+     * @throws MojoExecutionException in case of severe execution failure.
+     * @throws MojoFailureException   if the service is still unavailable after all the attempts.
+     */
     void run() throws MojoExecutionException, MojoFailureException {
 
         int n = 0;

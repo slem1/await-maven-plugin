@@ -5,7 +5,7 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 
 /**
- * Handler for testing connection to remote service on http
+ * Handler for testing connection to remote service on http.
  *
  * @author slemoine
  */
@@ -15,6 +15,13 @@ public class HttpService implements Service {
 
     private final Integer statusCode;
 
+    /**
+     * Creates a new instance based on {@code url}. The expected response status code
+     * is {@code statusCode}.
+     *
+     * @param url        the url of the service to connect to.
+     * @param statusCode the expected http response status code.
+     */
     public HttpService(URL url, Integer statusCode) {
 
         if (url == null) {
