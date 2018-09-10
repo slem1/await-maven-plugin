@@ -1,5 +1,10 @@
 package fr.sle.maven.plugins;
 
+/**
+ * The polling configuration which allows to configure {@link PollingTask}
+ *
+ * @author slemoine
+ */
 public class PollingConfig {
 
     private Integer attempts;

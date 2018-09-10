@@ -9,11 +9,11 @@ package fr.sle.maven.plugins;
 public interface MojoConnectionConfig {
 
     /**
-     * Generates the underlying service according to the configuration
+     * Build the underlying service implementation according to this configuration
      *
      * @return the service
      */
-    Service generateService();
+    Service buildService();
 
     /**
      * Returns the connection priority

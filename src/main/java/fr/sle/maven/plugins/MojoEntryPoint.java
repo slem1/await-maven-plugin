@@ -12,6 +12,12 @@ import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
 
+/**
+ *
+ * The plugin entry point. Retrieves the plugin configuration and runs the underlying tasks.
+ *
+ * @author slemoine
+ */
 @Mojo(name = "Await")
 public class MojoEntryPoint extends AbstractMojo {
 
@@ -85,7 +91,7 @@ public class MojoEntryPoint extends AbstractMojo {
                 DEFAULT_POLLING_CONFIG : poll.validate();
 
         for (MojoConnectionConfig config : configs) {
-            Service service = config.generateService();
+            Service service = config.buildService();
             PollingTask task = new PollingTask(service,
                     pollingConfig.getAttempts(),
                     pollingConfig.getSleep(), config.getPriority());

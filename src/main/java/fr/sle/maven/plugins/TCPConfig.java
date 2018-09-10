@@ -1,7 +1,7 @@
 package fr.sle.maven.plugins;
 
 /**
- * Plugin configuration for TCP.
+ * Plugin configuration for TCP connection
  *
  * @author slemoine
  */
@@ -26,7 +26,7 @@ public class TCPConfig implements MojoConnectionConfig {
     }
 
     @Override
-    public Service generateService(){
+    public Service buildService(){
         return new TCPService(host, port);
     }
 }

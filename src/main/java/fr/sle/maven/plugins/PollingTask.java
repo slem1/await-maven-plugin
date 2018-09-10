@@ -10,7 +10,7 @@ import org.apache.maven.plugin.logging.SystemStreamLog;
  *
  * @author slemoine
  */
-class PollingTask {
+public class PollingTask {
 
     private static Log log = new SystemStreamLog();
 

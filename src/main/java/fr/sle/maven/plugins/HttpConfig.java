@@ -28,7 +28,7 @@ public class HttpConfig implements MojoConnectionConfig {
     }
 
     @Override
-    public Service generateService() {
+    public Service buildService() {
         return new HttpService(url, statusCode);
     }
 

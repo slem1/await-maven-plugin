@@ -34,7 +34,7 @@ public class MojoEntryPointTest {
 
         TCPConfig tcpConfig = mock(TCPConfig.class);
         Service service = mock(Service.class);
-        when(tcpConfig.generateService()).thenReturn(service);
+        when(tcpConfig.buildService()).thenReturn(service);
 
         mojoEntryPoint.setTcps(Collections.singletonList(tcpConfig));
         mojoEntryPoint.execute();
@@ -56,7 +56,7 @@ public class MojoEntryPointTest {
         Service service = mock(Service.class);
         when(service.toString()).thenReturn("localhost:10080 (TCP)");
         doThrow(new ServiceUnavailableException("Service unavailable")).when(service).execute();
-        when(tcpConfig.generateService()).thenReturn(service);
+        when(tcpConfig.buildService()).thenReturn(service);
 
         mojoEntryPoint.setTcps(Collections.singletonList(tcpConfig));
 
@@ -77,13 +77,13 @@ public class MojoEntryPointTest {
         Service tcpService = mock(Service.class);
         when(tcpService.toString()).thenReturn("localhost:10080 (TCP)");
         doThrow(new ServiceUnavailableException("Service unavailable")).when(tcpService).execute();
-        when(tcpConfig.generateService()).thenReturn(tcpService);
+        when(tcpConfig.buildService()).thenReturn(tcpService);
 
         HttpConfig httpConfig = mock(HttpConfig.class);
         when(httpConfig.getPriority()).thenReturn(0);
         Service httpService = mock(HttpService.class);
         when(httpService.toString()).thenReturn("http://localhost:10080");
-        when(httpConfig.generateService()).thenReturn(httpService);
+        when(httpConfig.buildService()).thenReturn(httpService);
 
         mojoEntryPoint.setTcps(Collections.singletonList(tcpConfig));
         mojoEntryPoint.setHttpz(Collections.singletonList(httpConfig));
