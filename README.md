@@ -1,4 +1,4 @@
-#await-maven-plugin
+# await-maven-plugin
 
 await-maven-plugin is a plugin to pause maven build until some service is available.
 
