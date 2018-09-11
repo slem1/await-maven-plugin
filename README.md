@@ -65,24 +65,24 @@ The polling configuration object. Apply to each service to contact.
 ```
 
 #### attempts
-Max number of attempts to reach a service
+Max number of attempts to reach a service.
 
 ```xml
      <attempts>3</attempts>
 ```
 
 #### sleep
-Time to wait (in ms) between two attempts
+Time to wait (in ms) between two attempts.
 
 ```xml
      <sleep>1000</sleep>
 ```
 
 ### tcpConnections
-A collection of tcpConnection elements
+A collection of tcpConnection elements.
 
 #### tcp
-A tcp connection configuration
+A tcp connection configuration.
 
 ```xml
     <tcpConnection>
@@ -91,25 +91,26 @@ A tcp connection configuration
     </tcpConnection>
 ```
 
-##### hostname
+##### host
+The tcp host.
 ```xml
     <host>localhost</host>
 ```
 
-tcp host
-
 ##### port
+The tcp port.
 ```xml
     <port>5432</port>
    
 ```
-tcp port
 
 ### httpConnections
-A collection of http or https connections
 
-#### http
-The configuration of a connection to a service running on http
+A collection of http or https connections.
+
+#### httpConnection
+
+The configuration of a connection to a service running on http.
 ```xml
   <httpConnection>
     <url>http://mywebservice:9090</url>
@@ -117,13 +118,15 @@ The configuration of a connection to a service running on http
   </httpConnection>
 ```
 ##### url
-The service URL
+
+The service URL.
 ```xml
   <url>http://mywebservice:9090</url>
 ```
 
 ##### statusCode
-The expected status code response
+
+The expected status code response.
 ```xml
    <statusCode>200</statusCode>
 ```
@@ -168,7 +171,7 @@ Wait for a docker container startup and service up with docker-compose-maven-plu
                 <configuration>
                     <poll>
                         <attempts>3</attempts>
-                        <sleep>${sleep.time}</sleep>
+                        <sleep>5000</sleep>
                     </poll>
                     <httpConnections>
                         <httpConnection>
