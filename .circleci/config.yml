@@ -16,6 +16,12 @@ jobs:
 
     working_directory: ~/repo
 
+    branches:
+      only:
+      - master
+      - /rc-.*/
+      - dev
+
     environment:
       # Customize the JVM maximum heap limit
       MAVEN_OPTS: -Xmx3200m
