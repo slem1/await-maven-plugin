@@ -13,7 +13,7 @@ await-maven-plugin is a plugin to pause maven build until some service is availa
             <plugin>
                 <groupId>fr.sle</groupId>
                 <artifactId>await-maven-plugin</artifactId>
-                <version>1.0-SNAPSHOT</version>
+                <version>1.0</version>
                 <executions>
                     <execution>
                         <phase>process-test-classes</phase>
@@ -159,7 +159,7 @@ Wait for a docker container startup and service up with docker-compose-maven-plu
            <plugin>
                 <groupId>com.github.slem1</groupId>
                 <artifactId>await-maven-plugin</artifactId>
-                <version>1.0-SNAPSHOT</version>
+                <version>1.0</version>
                 <executions>
                     <execution>
                         <phase>process-test-classes</phase>
