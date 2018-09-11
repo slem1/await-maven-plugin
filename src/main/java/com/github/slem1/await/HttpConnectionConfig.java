@@ -15,6 +15,26 @@ public class HttpConnectionConfig implements MojoConnectionConfig {
 
     private int priority;
 
+    /**
+     * Default constructor used by maven.
+     */
+    public HttpConnectionConfig() {
+
+    }
+
+    /**
+     * Convenient constructor to create instance.
+     *
+     * @param url        url of the service.
+     * @param statusCode expected response status code.
+     * @param priority   the connection priority.
+     */
+    public HttpConnectionConfig(URL url, int statusCode, int priority) {
+        this.url = url;
+        this.statusCode = statusCode;
+        this.priority = priority;
+    }
+
     public int getPriority() {
         return priority;
     }
