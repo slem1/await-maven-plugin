@@ -1,4 +1,4 @@
-package fr.sle.maven.plugins;
+package com.github.slem1.await;
 
 /**
  * General contract for MOJO parameter of connection config.

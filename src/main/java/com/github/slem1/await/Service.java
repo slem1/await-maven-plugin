@@ -1,4 +1,4 @@
-package fr.sle.maven.plugins;
+package com.github.slem1.await;
 
 /**
  * Interface implemented by classes responsible for checking the availability of service.

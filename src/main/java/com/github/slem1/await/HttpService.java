@@ -1,4 +1,4 @@
-package fr.sle.maven.plugins;
+package com.github.slem1.await;
 
 import java.io.IOException;
 import java.net.HttpURLConnection;

@@ -1,4 +1,4 @@
-package fr.sle.maven.plugins;
+package com.github.slem1.await;
 
 /**
  * The polling configuration which allows to configure {@link PollingTask}.

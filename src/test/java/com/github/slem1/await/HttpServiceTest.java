@@ -1,4 +1,4 @@
-package fr.sle.maven.plugins;
+package com.github.slem1.await;
 
 import org.junit.Assert;
 import org.junit.Test;
