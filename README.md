@@ -3,9 +3,10 @@
 
 
 
-| master  | dev |
-| :---: | :---: |
-| [![Build Status](https://semaphoreci.com/api/v1/slem1/await-maven-plugin/branches/master/shields_badge.svg)](https://semaphoreci.com/slem1/await-maven-plugin)  | [![Build Status](https://semaphoreci.com/api/v1/slem1/await-maven-plugin/branches/dev/shields_badge.svg)](https://semaphoreci.com/slem1/await-maven-plugin)  |
+| service | master  | dev |
+| :---: | :---: | :---: |
+| CI Build | [![Build Status](https://semaphoreci.com/api/v1/slem1/await-maven-plugin/branches/master/shields_badge.svg)](https://semaphoreci.com/slem1/await-maven-plugin)  | [![Build Status](https://semaphoreci.com/api/v1/slem1/await-maven-plugin/branches/dev/shields_badge.svg)](https://semaphoreci.com/slem1/await-maven-plugin)  |
+| Test | [![Coverage Status](https://coveralls.io/repos/github/slem1/await-maven-plugin/badge.svg?branch=master)](https://coveralls.io/github/slem1/await-maven-plugin?branch=master) | [![Coverage Status](https://coveralls.io/repos/github/slem1/await-maven-plugin/badge.svg?branch=dev)](https://coveralls.io/github/slem1/await-maven-plugin?branch=dev)  |
 
 
 
