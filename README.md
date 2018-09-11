@@ -32,18 +32,18 @@ await-maven-plugin is a plugin to pause maven build until some service is availa
                         <attempts>3</attempts>
                         <sleep>1000</sleep>
                     </poll>
-                    <tcps>
-                        <tcp>
+                    <tcpConnections>
+                        <tcpConnection>
                             <host>localhost</host>
                             <port>5432</port>
-                        </tcp>
-                    </tcps>
-                    <httpz>
-                        <http>
+                        </tcpConnection>
+                    </tcpConnections>
+                    <httpConnections>
+                        <httpConnection>
                             <url>http://mywebservice:9090</url>
                             <statusCode>200</statusCode>
-                        </http>
-                    </httpz>    
+                        </httpConnection>
+                    </httpConnections>    
                 </configuration>
             </plugin>
 
@@ -83,17 +83,17 @@ Time to wait (in ms) between two attempts
      <sleep>1000</sleep>
 ```
 
-### tcps
-A collection of tcp services elements
+### tcpConnections
+A collection of tcpConnection elements
 
 #### tcp
-A tcp configuration
+A tcp connection configuration
 
 ```xml
-    <tcp>
+    <tcpConnection>
       <host>localhost</host>
       <port>5432</port>
-    </tcp>
+    </tcpConnection>
 ```
 
 ##### hostname
@@ -110,16 +110,16 @@ tcp host
 ```
 tcp port
 
-### httpz
-A collection of http or https services
+### httpConnections
+A collection of http or https connections
 
 #### http
-A service running on http
+The configuration of a connection to a service running on http
 ```xml
-  <http>
+  <httpConnection>
     <url>http://mywebservice:9090</url>
     <statusCode>200</statusCode>
-  </http>
+  </httpConnection>
 ```
 ##### url
 The service URL
@@ -135,7 +135,7 @@ The expected status code response
 
 ## Example use case
 
-Wait for a docker container startup and service up with docker-compose-maven-plugin
+Wait for a docker container startup and service up with docker-compose-maven-plugin before running integration tests.
 
 ```xml
 <build>
@@ -158,8 +158,8 @@ Wait for a docker container startup and service up with docker-compose-maven-plu
                 </executions>
             </plugin>
 
-            <plugin>
-                <groupId>fr.sle</groupId>
+           <plugin>
+                <groupId>com.github.slem1</groupId>
                 <artifactId>await-maven-plugin</artifactId>
                 <version>1.0-SNAPSHOT</version>
                 <executions>
@@ -173,14 +173,14 @@ Wait for a docker container startup and service up with docker-compose-maven-plu
                 <configuration>
                     <poll>
                         <attempts>3</attempts>
-                        <sleep>3000</sleep>
+                        <sleep>${sleep.time}</sleep>
                     </poll>
-                    <tcps>
-                        <tcp>
-                            <host>localhost</host>
-                            <port>5432</port>
-                        </tcp>
-                    </tcps>
+                    <httpz>
+                        <http>
+                            <url>http://localhost:27080</url>
+                            <statusCode>200</statusCode>
+                        </http>
+                    </httpz>
                 </configuration>
             </plugin>
         </plugins> 

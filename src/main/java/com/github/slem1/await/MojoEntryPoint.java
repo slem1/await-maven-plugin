@@ -30,22 +30,22 @@ public class MojoEntryPoint extends AbstractMojo {
     };
 
     @Parameter
-    private List<TCPConfig> tcps;
+    private List<TCPConnectionConfig> tcpConnections;
 
     @Parameter
-    private List<HttpConfig> httpz;
+    private List<HttpConnectionConfig> httpConnections;
 
     @Parameter
     private PollingConfig poll;
 
     //for unit testing
-    void setTcps(List<TCPConfig> tcps) {
-        this.tcps = tcps;
+    void setTcpConnections(List<TCPConnectionConfig> tcpConnections) {
+        this.tcpConnections = tcpConnections;
     }
 
     //for unit testing
-    void setHttpz(List<HttpConfig> httpz) {
-        this.httpz = httpz;
+    void setHttpConnections(List<HttpConnectionConfig> httpConnections) {
+        this.httpConnections = httpConnections;
     }
 
     //for unit testing
@@ -60,12 +60,12 @@ public class MojoEntryPoint extends AbstractMojo {
 
         List<MojoConnectionConfig> configs = new ArrayList<>();
 
-        if (tcps != null) {
-            configs.addAll(tcps);
+        if (tcpConnections != null) {
+            configs.addAll(tcpConnections);
         }
 
-        if (httpz != null) {
-            configs.addAll(httpz);
+        if (httpConnections != null) {
+            configs.addAll(httpConnections);
         }
 
         try {

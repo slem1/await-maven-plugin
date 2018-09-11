@@ -5,7 +5,7 @@ package com.github.slem1.await;
  *
  * @author slemoine
  */
-public class TCPConfig implements MojoConnectionConfig {
+public class TCPConnectionConfig implements MojoConnectionConfig {
 
     private String host;
 

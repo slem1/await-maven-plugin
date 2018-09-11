@@ -32,11 +32,11 @@ public class MojoEntryPointTest {
     @Test
     public void shouldExitProperly() throws MojoFailureException, MojoExecutionException, ServiceUnavailableException {
 
-        TCPConfig tcpConfig = mock(TCPConfig.class);
+        TCPConnectionConfig tcpConnectionConfig = mock(TCPConnectionConfig.class);
         Service service = mock(Service.class);
-        when(tcpConfig.buildService()).thenReturn(service);
+        when(tcpConnectionConfig.buildService()).thenReturn(service);
 
-        mojoEntryPoint.setTcps(Collections.singletonList(tcpConfig));
+        mojoEntryPoint.setTcpConnections(Collections.singletonList(tcpConnectionConfig));
         mojoEntryPoint.execute();
 
         verify(service).execute();
@@ -52,13 +52,13 @@ public class MojoEntryPointTest {
     @Test(expected = MojoFailureException.class)
     public void shouldThrowOnUnreachableService() throws MojoFailureException, MojoExecutionException, ServiceUnavailableException {
 
-        TCPConfig tcpConfig = mock(TCPConfig.class);
+        TCPConnectionConfig tcpConnectionConfig = mock(TCPConnectionConfig.class);
         Service service = mock(Service.class);
         when(service.toString()).thenReturn("localhost:10080 (TCP)");
         doThrow(new ServiceUnavailableException("Service unavailable")).when(service).execute();
-        when(tcpConfig.buildService()).thenReturn(service);
+        when(tcpConnectionConfig.buildService()).thenReturn(service);
 
-        mojoEntryPoint.setTcps(Collections.singletonList(tcpConfig));
+        mojoEntryPoint.setTcpConnections(Collections.singletonList(tcpConnectionConfig));
 
         try {
             mojoEntryPoint.execute();
@@ -72,21 +72,21 @@ public class MojoEntryPointTest {
     @Test(expected = MojoFailureException.class)
     public void shouldRunTasksInOrder() throws MojoFailureException, MojoExecutionException, ServiceUnavailableException {
 
-        TCPConfig tcpConfig = mock(TCPConfig.class);
-        when(tcpConfig.getPriority()).thenReturn(1);
+        TCPConnectionConfig tcpConnectionConfig = mock(TCPConnectionConfig.class);
+        when(tcpConnectionConfig.getPriority()).thenReturn(1);
         Service tcpService = mock(Service.class);
         when(tcpService.toString()).thenReturn("localhost:10080 (TCP)");
         doThrow(new ServiceUnavailableException("Service unavailable")).when(tcpService).execute();
-        when(tcpConfig.buildService()).thenReturn(tcpService);
+        when(tcpConnectionConfig.buildService()).thenReturn(tcpService);
 
-        HttpConfig httpConfig = mock(HttpConfig.class);
-        when(httpConfig.getPriority()).thenReturn(0);
+        HttpConnectionConfig httpConnectionConfig = mock(HttpConnectionConfig.class);
+        when(httpConnectionConfig.getPriority()).thenReturn(0);
         Service httpService = mock(HttpService.class);
         when(httpService.toString()).thenReturn("http://localhost:10080");
-        when(httpConfig.buildService()).thenReturn(httpService);
+        when(httpConnectionConfig.buildService()).thenReturn(httpService);
 
-        mojoEntryPoint.setTcps(Collections.singletonList(tcpConfig));
-        mojoEntryPoint.setHttpz(Collections.singletonList(httpConfig));
+        mojoEntryPoint.setTcpConnections(Collections.singletonList(tcpConnectionConfig));
+        mojoEntryPoint.setHttpConnections(Collections.singletonList(httpConnectionConfig));
 
         try {
             mojoEntryPoint.execute();
@@ -101,9 +101,9 @@ public class MojoEntryPointTest {
     @Test(expected = MojoFailureException.class)
     public void shouldHandleIllegalArgumentToMojoFailure() throws MojoFailureException, MojoExecutionException {
 
-        TCPConfig tcpConfig = mock(TCPConfig.class);
-        when(tcpConfig.getPriority()).thenReturn(1);
-        mojoEntryPoint.setTcps(Collections.singletonList(tcpConfig));
+        TCPConnectionConfig tcpConnectionConfig = mock(TCPConnectionConfig.class);
+        when(tcpConnectionConfig.getPriority()).thenReturn(1);
+        mojoEntryPoint.setTcpConnections(Collections.singletonList(tcpConnectionConfig));
 
         try {
             mojoEntryPoint.execute();

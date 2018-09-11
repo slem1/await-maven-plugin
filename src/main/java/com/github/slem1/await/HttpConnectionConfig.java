@@ -7,7 +7,7 @@ import java.net.URL;
  *
  * @author slemoine
  */
-public class HttpConfig implements MojoConnectionConfig {
+public class HttpConnectionConfig implements MojoConnectionConfig {
 
     private URL url;
 
