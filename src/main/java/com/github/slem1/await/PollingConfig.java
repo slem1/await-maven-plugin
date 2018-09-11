@@ -7,16 +7,14 @@ package com.github.slem1.await;
  */
 public class PollingConfig {
 
-    private Integer attempts;
+    private int attempts = 3;
 
-    private Integer sleep;
+    private int sleep = 1000;
 
     /**
-     * Initialize a default polling configuration with default values.
+     * Default constructor used by maven
      */
     public PollingConfig() {
-        attempts = 3;
-        sleep = 1000;
     }
 
     /**
@@ -27,6 +25,7 @@ public class PollingConfig {
      * @param sleep    the waiting time in ms.
      */
     public PollingConfig(int attempts, int sleep) {
+        validate(attempts, sleep);
         this.attempts = attempts;
         this.sleep = sleep;
     }
@@ -36,7 +35,7 @@ public class PollingConfig {
      *
      * @return the number of attempts.
      */
-    public Integer getAttempts() {
+    public int getAttempts() {
         return attempts;
     }
 
@@ -45,7 +44,7 @@ public class PollingConfig {
      *
      * @return the waiting time
      */
-    public Integer getSleep() {
+    public int getSleep() {
         return sleep;
     }
 
@@ -56,14 +55,17 @@ public class PollingConfig {
      * @throws IllegalArgumentException if the configuration is invalid.
      */
     public PollingConfig validate() {
-        if (attempts == null || attempts < 1) {
-            throw new IllegalArgumentException("attempts is mandatory and must be >= 1");
-        }
-
-        if (sleep == null || sleep < 0) {
-            throw new IllegalArgumentException("sleep is mandatory and must be >= 0");
-        }
-
+        validate(attempts, sleep);
         return this;
+    }
+
+    private void validate(int attempts, int sleep) {
+        if (attempts < 1) {
+            throw new IllegalArgumentException("attempts must be >= 1");
+        }
+
+        if (sleep < 0) {
+            throw new IllegalArgumentException("sleep cannot be negative");
+        }
     }
 }

@@ -37,7 +37,15 @@ public class PollingTask {
         }
 
         if (maxAttempt < 1) {
-            throw new IllegalArgumentException("Polling task should executes service once at least");
+            throw new IllegalArgumentException("Polling task should execute at least once");
+        }
+
+        if (waitTime < 0) {
+            throw new IllegalArgumentException("waitTime value cannot be negative");
+        }
+
+        if(priority < 0){
+            throw new IllegalArgumentException("priority value must be equals or greater than 0");
         }
 
         this.service = service;
