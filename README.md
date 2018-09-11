@@ -1,5 +1,14 @@
 # await-maven-plugin
 
+
+
+
+| master  | dev |
+| :---: | :---: |
+| [![Build Status](https://semaphoreci.com/api/v1/slem1/await-maven-plugin/branches/master/shields_badge.svg)](https://semaphoreci.com/slem1/await-maven-plugin)  | [![Build Status](https://semaphoreci.com/api/v1/slem1/await-maven-plugin/branches/dev/shields_badge.svg)](https://semaphoreci.com/slem1/await-maven-plugin)  |
+
+
+
 await-maven-plugin is a plugin to pause maven build until some service is available.
 
 ## Example configuration
