@@ -7,10 +7,9 @@ import org.apache.maven.plugins.annotations.Mojo;
 import org.apache.maven.plugins.annotations.Parameter;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
-import java.util.Set;
-import java.util.TreeSet;
 
 /**
  * The plugin entry point. Retrieves the plugin configuration and runs the underlying tasks.
@@ -69,7 +68,7 @@ public class MojoEntryPoint extends AbstractMojo {
         }
 
         try {
-            Set<PollingTask> tasks = toPollingTasks(configs);
+            List<PollingTask> tasks = toPollingTasks(configs);
 
             if (tasks.isEmpty()) {
                 getLog().warn("No tasks found");
@@ -85,9 +84,9 @@ public class MojoEntryPoint extends AbstractMojo {
         }
     }
 
-    private Set<PollingTask> toPollingTasks(List<MojoConnectionConfig> configs) {
+    private List<PollingTask> toPollingTasks(List<MojoConnectionConfig> configs) {
 
-        Set<PollingTask> pollingTasks = new TreeSet<>(TASK_PRIORITY_COMPARATOR);
+        List<PollingTask> pollingTasks = new ArrayList<>();
 
         PollingConfig pollingConfig = poll == null ?
                 DEFAULT_POLLING_CONFIG : poll.validate();
@@ -99,6 +98,8 @@ public class MojoEntryPoint extends AbstractMojo {
                     pollingConfig.getSleep(), config.getPriority());
             pollingTasks.add(task);
         }
+
+        Collections.sort(pollingTasks, TASK_PRIORITY_COMPARATOR);
 
         return pollingTasks;
     }
