@@ -143,6 +143,7 @@ public class MojoEntryPointTest {
         Service tcpService2 = mock(Service.class);
         when(tcpService2.toString()).thenReturn("localhost:10081 (TCP-2)");
         when(tcpConnectionConfig2.buildService()).thenReturn(tcpService2);
+        when(tcpConnectionConfig2.getPriority()).thenReturn(Integer.MAX_VALUE);
 
         mojoEntryPoint.setTcpConnections(Arrays.asList(tcpConnectionConfig1, tcpConnectionConfig2));
         mojoEntryPoint.setHttpConnections(Collections.singletonList(httpConnectionConfig));
@@ -150,9 +151,9 @@ public class MojoEntryPointTest {
 
         InOrder inOrder = Mockito.inOrder(tcpService2, tcpService1, httpService);
 
-        inOrder.verify(tcpService2).execute();
         inOrder.verify(httpService).execute();
         inOrder.verify(tcpService1).execute();
+        inOrder.verify(tcpService2).execute();
 
     }
 

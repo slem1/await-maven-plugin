@@ -13,7 +13,8 @@ public class HttpConnectionConfigTest {
 
     @Test
     public void shouldCreateDefaultInstance() {
-        new HttpConnectionConfig();
+        HttpConnectionConfig httpConnectionConfig = new HttpConnectionConfig();
+        Assert.assertEquals(Integer.MAX_VALUE,httpConnectionConfig.getPriority());
     }
 
     @Test
