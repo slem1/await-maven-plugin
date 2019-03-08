@@ -17,36 +17,19 @@ import java.security.NoSuchAlgorithmException;
  */
 public class HttpService implements Service {
 
+    private static final String HTTPS = "https";
+    private static final String SSL = "SSL";
+
+    private static final TrustManager[] ignoreSSLCertTrustManager;
+
     private final URL url;
 
     private final Integer statusCode;
 
-    private final boolean trustAllCerts;
+    private final boolean skipSSLCertVerification;
 
-    /**
-     * Creates a new instance based on {@code url}. The expected response status code
-     * is {@code statusCode}.
-     *
-     * @param url        the url of the service to connect to.
-     * @param statusCode the expected http response status code.
-     */
-    public HttpService(URL url, Integer statusCode, boolean trustAllCerts) {
-
-        if (url == null) {
-            throw new IllegalArgumentException("URL is mandatory");
-        }
-
-        if (statusCode == null) {
-            throw new IllegalArgumentException("status code is mandatory");
-        }
-
-        this.url = url;
-        this.statusCode = statusCode;
-        this.trustAllCerts = trustAllCerts;
-    }
-
-    private TrustManager[] getTrustAllCertsTrustManager() {
-        return new TrustManager[]{
+    static {
+        ignoreSSLCertTrustManager =  new TrustManager[]{
                 new X509TrustManager() {
                     public java.security.cert.X509Certificate[] getAcceptedIssuers() {
                         return null;
@@ -63,6 +46,28 @@ public class HttpService implements Service {
         };
     }
 
+    /**
+     * Creates a new instance based on {@code url}. The expected response status code
+     * is {@code statusCode}.
+     *
+     * @param url        the url of the service to connect to.
+     * @param statusCode the expected http response status code.
+     */
+    public HttpService(URL url, Integer statusCode, boolean skipSSLCertVerification) {
+
+        if (url == null) {
+            throw new IllegalArgumentException("URL is mandatory");
+        }
+
+        if (statusCode == null) {
+            throw new IllegalArgumentException("status code is mandatory");
+        }
+
+        this.url = url;
+        this.statusCode = statusCode;
+        this.skipSSLCertVerification = skipSSLCertVerification;
+    }
+
     @Override
     public String toString() {
         return url.toString();
@@ -72,11 +77,11 @@ public class HttpService implements Service {
     public void execute() throws ServiceUnavailableException {
         try {
             HttpURLConnection urlConnection;
-            if (url.getProtocol().equals("https")) {
+            if (url.getProtocol().equals(HTTPS)) {
                 urlConnection = (HttpsURLConnection) url.openConnection();
-                if (trustAllCerts) {
-                    SSLContext sc = SSLContext.getInstance("SSL");
-                    sc.init(null, getTrustAllCertsTrustManager(), new java.security.SecureRandom());
+                if (skipSSLCertVerification) {
+                    SSLContext sc = SSLContext.getInstance(SSL);
+                    sc.init(null, ignoreSSLCertTrustManager, new java.security.SecureRandom());
                     ((HttpsURLConnection) urlConnection).setSSLSocketFactory(sc.getSocketFactory());
                 }
             } else {

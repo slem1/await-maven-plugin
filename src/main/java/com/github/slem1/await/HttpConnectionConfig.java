@@ -15,7 +15,7 @@ public class HttpConnectionConfig implements MojoConnectionConfig {
 
     private int priority = Integer.MAX_VALUE;
 
-    private boolean trustAllCerts;
+    private boolean skipSSLCertVerification;
 
     /**
      * Default constructor used by maven.
@@ -30,14 +30,14 @@ public class HttpConnectionConfig implements MojoConnectionConfig {
      * @param url        url of the service.
      * @param statusCode expected response status code.
      * @param priority   the connection priority.
-     * @param trustAllCerts   https connections ignore certs.
+     * @param skipSSLCertVerification   https connections ignore certs.
      */
 
-    public HttpConnectionConfig(URL url, int statusCode, int priority, boolean trustAllCerts) {
+    public HttpConnectionConfig(URL url, int statusCode, int priority, boolean skipSSLCertVerification) {
         this.url = url;
         this.statusCode = statusCode;
         this.priority = priority;
-        this.trustAllCerts = trustAllCerts;
+        this.skipSSLCertVerification = skipSSLCertVerification;
     }
 
     public int getPriority() {
@@ -46,7 +46,7 @@ public class HttpConnectionConfig implements MojoConnectionConfig {
 
     @Override
     public Service buildService() {
-        return new HttpService(url, statusCode, trustAllCerts);
+        return new HttpService(url, statusCode, skipSSLCertVerification);
     }
 
 }
