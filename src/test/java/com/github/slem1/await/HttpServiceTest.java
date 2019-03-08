@@ -22,7 +22,8 @@ public class HttpServiceTest {
         HttpURLConnection urlConnection = Mockito.mock(HttpURLConnection.class);
         when(urlConnection.getResponseCode()).thenReturn(200);
         when(url.openConnection()).thenReturn(urlConnection);
-        HttpService httpService = new HttpService(url, 200);
+        when(url.getProtocol()).thenReturn("http");
+        HttpService httpService = new HttpService(url, 200, false);
         httpService.execute();
     }
 
@@ -31,11 +32,13 @@ public class HttpServiceTest {
         URL url = Mockito.mock(URL.class);
 
         Mockito.when(url.toString()).thenReturn("http://localhost");
+        Mockito.when(url.getProtocol()).thenReturn("http");
 
         HttpURLConnection urlConnection = Mockito.mock(HttpURLConnection.class);
         when(urlConnection.getResponseCode()).thenReturn(403);
         when(url.openConnection()).thenReturn(urlConnection);
-        HttpService httpService = new HttpService(url, 200);
+        when(url.getProtocol()).thenReturn("http");
+        HttpService httpService = new HttpService(url, 200, false);
 
         try {
             httpService.execute();
@@ -47,18 +50,18 @@ public class HttpServiceTest {
 
     @Test(expected = IllegalArgumentException.class)
     public void assertContructorParamUrl() {
-        new HttpService(null, 200);
+        new HttpService(null, 200, false);
     }
 
     @Test(expected = IllegalArgumentException.class)
     public void assertContructorParamStatusCode() throws MalformedURLException {
-        new HttpService(new URL("http://localhost"), null);
+        new HttpService(new URL("http://localhost"), null, false);
     }
 
     @Test
     public void assertToStringBehavior() throws MalformedURLException {
         URL url = new URL("http://localhost");
-        HttpService httpService = new HttpService(url, 200);
+        HttpService httpService = new HttpService(url, 200, false);
         Assert.assertEquals("http://localhost", httpService.toString());
     }
 
@@ -67,8 +70,9 @@ public class HttpServiceTest {
         URL url = Mockito.mock(URL.class);
 
         when(url.toString()).thenReturn("http://localhost");
+        when(url.getProtocol()).thenReturn("http");
         when(url.openConnection()).thenThrow(new IOException("Connection error"));
-        HttpService httpService = new HttpService(url, 200);
+        HttpService httpService = new HttpService(url, 200, false);
 
         try {
             httpService.execute();
