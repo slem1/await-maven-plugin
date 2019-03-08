@@ -13,7 +13,7 @@ public class HttpConnectionConfig implements MojoConnectionConfig {
 
     private int statusCode;
 
-    private int priority;
+    private int priority = Integer.MAX_VALUE;
 
     /**
      * Default constructor used by maven.

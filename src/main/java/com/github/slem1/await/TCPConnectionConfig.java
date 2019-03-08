@@ -11,7 +11,7 @@ public class TCPConnectionConfig implements MojoConnectionConfig {
 
     private Integer port;
 
-    private int priority;
+    private int priority = Integer.MAX_VALUE;
 
     /**
      * Default constructor used by maven.
