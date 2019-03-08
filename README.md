@@ -11,9 +11,9 @@ await-maven-plugin is a plugin to pause maven build until some service is availa
 
 ```xml
             <plugin>
-                <groupId>fr.sle</groupId>
+                <groupId>com.github.slem1</groupId>
                 <artifactId>await-maven-plugin</artifactId>
-                <version>1.0</version>
+                <version>1.1</version>
                 <executions>
                     <execution>
                         <phase>process-test-classes</phase>
@@ -92,16 +92,25 @@ A tcp connection configuration.
 ```
 
 ##### host
+
 The tcp host.
 ```xml
     <host>localhost</host>
 ```
 
 ##### port
+
 The tcp port.
 ```xml
     <port>5432</port>
-   
+```
+
+##### priority
+
+Defines the order in which the connection will be attempted across tcpConnection and httpConnection. The 0 value is the highest priority.
+By default, if not defined, the priority is the lowest (Integer.MAX_VALUE). 
+```xml
+    <priority>100</priority>
 ```
 
 ### httpConnections
@@ -129,6 +138,14 @@ The service URL.
 The expected status code response.
 ```xml
    <statusCode>200</statusCode>
+```
+
+##### priority
+
+Defines the order in which the connection will be attempted across tcpConnection and httpConnection. The 0 value is the highest priority.
+By default, if not defined, the priority is the lowest (Integer.MAX_VALUE). 
+```xml
+    <priority>100</priority>
 ```
 
 ## Example use case
@@ -159,7 +176,7 @@ Wait for a docker container startup and service up with docker-compose-maven-plu
            <plugin>
                 <groupId>com.github.slem1</groupId>
                 <artifactId>await-maven-plugin</artifactId>
-                <version>1.0</version>
+                <version>1.1</version>
                 <executions>
                     <execution>
                         <phase>process-test-classes</phase>

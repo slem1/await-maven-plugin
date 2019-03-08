@@ -10,7 +10,8 @@ public class TCPConnectionConfigTest {
 
     @Test
     public void shouldCreateDefaultInstance() {
-        new TCPConnectionConfig();
+        TCPConnectionConfig tcpConnectionConfig = new TCPConnectionConfig();
+        Assert.assertEquals(Integer.MAX_VALUE,tcpConnectionConfig.getPriority());
     }
 
     @Test
