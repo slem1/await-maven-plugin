@@ -179,7 +179,7 @@ public class HttpServiceTest {
         URL url = Mockito.mock(URL.class);
 
         when(url.toString()).thenReturn("https://localhost");
-        when(url.getProtocol()).thenReturn("http");
+        when(url.getProtocol()).thenReturn("https");
         when(url.openConnection()).thenThrow(new IOException("Connection error"));
         HttpService httpService = new HttpService(url, 200, true);
 
@@ -198,7 +198,7 @@ public class HttpServiceTest {
         URL url = Mockito.mock(URL.class);
 
         when(url.toString()).thenReturn("https://localhost");
-        when(url.getProtocol()).thenReturn("http");
+        when(url.getProtocol()).thenReturn("https");
         when(url.openConnection()).thenThrow(new IOException("Connection error"));
         HttpService httpService = new HttpService(url, 200, false);
 
