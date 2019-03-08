@@ -148,6 +148,14 @@ By default, if not defined, the priority is the lowest (Integer.MAX_VALUE).
     <priority>100</priority>
 ```
 
+##### skip SSL certificate verification
+
+Set true if you want to skip SSL certificate verification.
+
+```xml
+    <skipSSLCertVerification>true</skipSSLCertVerification>
+```
+
 ## Example use case
 
 Wait for a docker container startup and service up with docker-compose-maven-plugin before running integration tests.
