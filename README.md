@@ -13,7 +13,7 @@ await-maven-plugin is a plugin to pause maven build until some service is availa
             <plugin>
                 <groupId>com.github.slem1</groupId>
                 <artifactId>await-maven-plugin</artifactId>
-                <version>1.1</version>
+                <version>1.2</version>
                 <executions>
                     <execution>
                         <phase>process-test-classes</phase>
@@ -148,6 +148,14 @@ By default, if not defined, the priority is the lowest (Integer.MAX_VALUE).
     <priority>100</priority>
 ```
 
+##### skip SSL certificate verification
+
+Set true if you want to skip SSL certificate verification.
+
+```xml
+    <skipSSLCertVerification>true</skipSSLCertVerification>
+```
+
 ## Example use case
 
 Wait for a docker container startup and service up with docker-compose-maven-plugin before running integration tests.
@@ -176,7 +184,7 @@ Wait for a docker container startup and service up with docker-compose-maven-plu
            <plugin>
                 <groupId>com.github.slem1</groupId>
                 <artifactId>await-maven-plugin</artifactId>
-                <version>1.1</version>
+                <version>1.2</version>
                 <executions>
                     <execution>
                         <phase>process-test-classes</phase>
