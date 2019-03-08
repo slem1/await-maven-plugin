@@ -19,7 +19,7 @@ public class HttpConnectionConfigTest {
 
     @Test
     public void shouldCreateInitializedInstance() throws MalformedURLException {
-        HttpConnectionConfig httpConnectionConfig = new HttpConnectionConfig(new URL("http://localhost:9000"), 200, 0);
+        HttpConnectionConfig httpConnectionConfig = new HttpConnectionConfig(new URL("http://localhost:9000"), 200, 0, true);
         Assert.assertEquals(0, httpConnectionConfig.getPriority());
         Service service = httpConnectionConfig.buildService();
         Assert.assertEquals(HttpService.class, service.getClass());
