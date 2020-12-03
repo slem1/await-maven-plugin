@@ -5,6 +5,7 @@ import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugin.MojoFailureException;
 import org.apache.maven.plugins.annotations.Mojo;
 import org.apache.maven.plugins.annotations.Parameter;
+import org.sonatype.inject.Parameters;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -28,6 +29,12 @@ public class MojoEntryPoint extends AbstractMojo {
         }
     };
 
+    private PollingTaskExecutor pollingTaskExecutor;
+
+    public MojoEntryPoint(){
+        pollingTaskExecutor = new PollingTaskExecutor();
+    }
+
     @Parameter
     private List<TCPConnectionConfig> tcpConnections;
 
@@ -36,6 +43,9 @@ public class MojoEntryPoint extends AbstractMojo {
 
     @Parameter
     private PollingConfig poll;
+
+    @Parameter
+    private Boolean awaitSkip;
 
     //for unit testing
     void setTcpConnections(List<TCPConnectionConfig> tcpConnections) {
@@ -52,10 +62,18 @@ public class MojoEntryPoint extends AbstractMojo {
         this.poll = pollingConfig;
     }
 
+    public void setAwaitSkip(Boolean awaitSkip) {
+        this.awaitSkip = awaitSkip;
+    }
+
     /**
      * {@inheritDoc}
      */
     public void execute() throws MojoFailureException, MojoExecutionException {
+
+        if (Boolean.TRUE.equals(awaitSkip)) {
+            return;
+        }
 
         List<MojoConnectionConfig> configs = new ArrayList<>();
 
@@ -73,11 +91,7 @@ public class MojoEntryPoint extends AbstractMojo {
             if (tasks.isEmpty()) {
                 getLog().warn("No tasks found");
             } else {
-
-                for (PollingTask task : tasks) {
-                    task.run();
-                }
-
+                pollingTaskExecutor.run(tasks);
             }
         } catch (IllegalArgumentException e) {
             throw new MojoFailureException(e.getMessage(), e);
