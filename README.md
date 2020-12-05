@@ -23,6 +23,7 @@ await-maven-plugin is a plugin to pause maven build until some service is availa
                     </execution>
                 </executions>
                 <configuration>
+                    <awaitSkip>false</awaitSkip>
                     <poll>
                         <attempts>3</attempts>
                         <sleep>1000</sleep>
@@ -53,6 +54,14 @@ two services:
 The plugin will make 3 attempts on to reach each service, waiting 1000ms between each try.
 
 ## Parameters description
+
+
+### awaitSkip
+Set to true if you want to skip plugin execution. Can also be passed as -DawaitSkip
+
+```xml
+ <awaitSkip>true</awaitSkip>
+```
 
 ### poll
 The polling configuration object. Apply to each service to contact.

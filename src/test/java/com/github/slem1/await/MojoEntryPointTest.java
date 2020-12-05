@@ -10,6 +10,7 @@ import org.junit.runners.JUnit4;
 import org.mockito.InOrder;
 import org.mockito.Mockito;
 
+import java.lang.reflect.Field;
 import java.util.Arrays;
 import java.util.Collections;
 
@@ -173,6 +174,27 @@ public class MojoEntryPointTest {
             Assert.assertEquals("Service is mandatory", e.getCause().getMessage());
             throw e;
         }
+    }
 
+    @Test
+    public void shouldSkip() throws NoSuchFieldException, IllegalAccessException, MojoFailureException, MojoExecutionException {
+
+        MojoEntryPoint mojoEntryPoint = new MojoEntryPoint();
+        PollingTaskExecutor taskExecutorMock = mock(PollingTaskExecutor.class);
+
+        HttpConnectionConfig httpConnectionConfig = mock(HttpConnectionConfig.class);
+        when(httpConnectionConfig.getPriority()).thenReturn(0);
+        Service httpService = mock(HttpService.class);
+        when(httpService.toString()).thenReturn("http://localhost:10080");
+        when(httpConnectionConfig.buildService()).thenReturn(httpService);
+
+        Field pollingTaskExecutor = MojoEntryPoint.class.getDeclaredField("pollingTaskExecutor");
+        pollingTaskExecutor.setAccessible(true);
+        pollingTaskExecutor.set(mojoEntryPoint, taskExecutorMock);
+        mojoEntryPoint.setAwaitSkip(true);
+        mojoEntryPoint.setHttpConnections(Collections.singletonList(httpConnectionConfig));
+        mojoEntryPoint.execute();
+
+        Mockito.verifyZeroInteractions(taskExecutorMock);
     }
 }
