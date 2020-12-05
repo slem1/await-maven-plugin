@@ -44,7 +44,7 @@ public class MojoEntryPoint extends AbstractMojo {
     @Parameter
     private PollingConfig poll;
 
-    @Parameter
+    @Parameter(property = "awaitSkip")
     private Boolean awaitSkip;
 
     //for unit testing
