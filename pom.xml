@@ -17,7 +17,7 @@
     <properties>
         <maven-plugin-annotation.version>3.4</maven-plugin-annotation.version>
         <maven-plugin-api.version>3.0</maven-plugin-api.version>
-        <junit.version>4.12</junit.version>
+        <junit.version>4.13.1</junit.version>
         <mockito-core.version>2.21.0</mockito-core.version>
         <jacoco-maven-plugin.version>0.8.2</jacoco-maven-plugin.version>
         <maven-javadoc-plugin.version>3.0.1</maven-javadoc-plugin.version>
