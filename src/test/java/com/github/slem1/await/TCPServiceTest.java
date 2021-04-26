@@ -1,14 +1,15 @@
 package com.github.slem1.await;
 
 
+import java.io.IOException;
+import java.net.ServerSocket;
+
+import javax.net.ServerSocketFactory;
+
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.JUnit4;
-
-import javax.net.ServerSocketFactory;
-import java.io.IOException;
-import java.net.ServerSocket;
 
 @RunWith(JUnit4.class)
 public class TCPServiceTest {
