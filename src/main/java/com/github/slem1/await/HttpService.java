@@ -52,6 +52,7 @@ public class HttpService implements Service {
      *
      * @param url        the url of the service to connect to.
      * @param statusCode the expected http response status code.
+     * @param skipSSLCertVerification true if you want to skip SSL certificate verification.
      */
     public HttpService(URL url, Integer statusCode, boolean skipSSLCertVerification) {
 
