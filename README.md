@@ -92,7 +92,7 @@ Time to wait (in ms) between two attempts.
 
 #### throwOnFail
 
-Default behaviour is to throw an exception if all attemps fail. You can override this with the throwOnFail setting. This is usefull when you run services in a docker container and need a cleanup step in the 'post-integration-test' phase.
+Default behaviour is to throw an exception if all attemps fail. You can override this with the throwOnFail setting. This is useful when you run services in a docker container and need a cleanup step in the 'post-integration-test' phase.
 
 ```xml
      <throwOnFail>false<throwOnFail>
