@@ -1,9 +1,9 @@
 # await-maven-plugin
 
-| service | master  | dev |
-| :---: | :---: | :---: |
-| CI Build | [![Build Status](https://semaphoreci.com/api/v1/slem1/await-maven-plugin/branches/master/shields_badge.svg)](https://semaphoreci.com/slem1/await-maven-plugin)  | [![Build Status](https://semaphoreci.com/api/v1/slem1/await-maven-plugin/branches/dev/shields_badge.svg)](https://semaphoreci.com/slem1/await-maven-plugin)  |
-| Test | [![Coverage Status](https://coveralls.io/repos/github/slem1/await-maven-plugin/badge.svg?branch=master)](https://coveralls.io/github/slem1/await-maven-plugin?branch=master) | [![Coverage Status](https://coveralls.io/repos/github/slem1/await-maven-plugin/badge.svg?branch=dev)](https://coveralls.io/github/slem1/await-maven-plugin?branch=dev)  |
+| service  |                                                                                    master                                                                                    |                                                                                  dev                                                                                   |
+| :------: | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------: | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------: |
+| CI Build |        [![Build Status](https://semaphoreci.com/api/v1/slem1/await-maven-plugin/branches/master/shields_badge.svg)](https://semaphoreci.com/slem1/await-maven-plugin)        |      [![Build Status](https://semaphoreci.com/api/v1/slem1/await-maven-plugin/branches/dev/shields_badge.svg)](https://semaphoreci.com/slem1/await-maven-plugin)       |
+|   Test   | [![Coverage Status](https://coveralls.io/repos/github/slem1/await-maven-plugin/badge.svg?branch=master)](https://coveralls.io/github/slem1/await-maven-plugin?branch=master) | [![Coverage Status](https://coveralls.io/repos/github/slem1/await-maven-plugin/badge.svg?branch=dev)](https://coveralls.io/github/slem1/await-maven-plugin?branch=dev) |
 
 await-maven-plugin is a plugin to pause maven build until some service is available.
 
@@ -39,24 +39,24 @@ await-maven-plugin is a plugin to pause maven build until some service is availa
                             <url>http://mywebservice:9090</url>
                             <statusCode>200</statusCode>
                         </httpConnection>
-                    </httpConnections>    
+                    </httpConnections>
                 </configuration>
             </plugin>
 
 ```
 
 With the above configuration, the maven build will pause after process-test-classes and wait for the availability of
-two services: 
+two services:
 
-  - a tcp service on localhost:5432 (postgres)
-  - a 200 OK http response from http://mywebservice:9090.
+- a tcp service on localhost:5432 (postgres)
+- a 200 OK http response from http://mywebservice:9090.
 
 The plugin will make 3 attempts on to reach each service, waiting 1000ms between each try.
 
 ## Parameters description
 
-
 ### awaitSkip
+
 Set to true if you want to skip plugin execution. Can also be passed as -DawaitSkip
 
 ```xml
@@ -64,6 +64,7 @@ Set to true if you want to skip plugin execution. Can also be passed as -DawaitS
 ```
 
 ### poll
+
 The polling configuration object. Apply to each service to contact.
 
 ```xml
@@ -74,6 +75,7 @@ The polling configuration object. Apply to each service to contact.
 ```
 
 #### attempts
+
 Max number of attempts to reach a service.
 
 ```xml
@@ -81,16 +83,27 @@ Max number of attempts to reach a service.
 ```
 
 #### sleep
+
 Time to wait (in ms) between two attempts.
 
 ```xml
      <sleep>1000</sleep>
 ```
 
+#### throwOnFail
+
+Default behaviour is to throw an exception if all attemps fail. You can override this with the throwOnFail setting. This is usefull when you run services in a docker container and need a cleanup step in the 'post-integration-test' phase.
+
+```xml
+     <throwOnFail>false<throwOnFail>
+```
+
 ### tcpConnections
+
 A collection of tcpConnection elements.
 
 #### tcp
+
 A tcp connection configuration.
 
 ```xml
@@ -103,6 +116,7 @@ A tcp connection configuration.
 ##### host
 
 The tcp host.
+
 ```xml
     <host>localhost</host>
 ```
@@ -110,6 +124,7 @@ The tcp host.
 ##### port
 
 The tcp port.
+
 ```xml
     <port>5432</port>
 ```
@@ -117,7 +132,8 @@ The tcp port.
 ##### priority
 
 Defines the order in which the connection will be attempted across tcpConnection and httpConnection. The 0 value is the highest priority.
-By default, if not defined, the priority is the lowest (Integer.MAX_VALUE). 
+By default, if not defined, the priority is the lowest (Integer.MAX_VALUE).
+
 ```xml
     <priority>100</priority>
 ```
@@ -129,15 +145,18 @@ A collection of http or https connections.
 #### httpConnection
 
 The configuration of a connection to a service running on http.
+
 ```xml
   <httpConnection>
     <url>http://mywebservice:9090</url>
     <statusCode>200</statusCode>
   </httpConnection>
 ```
+
 ##### url
 
 The service URL.
+
 ```xml
   <url>http://mywebservice:9090</url>
 ```
@@ -145,6 +164,7 @@ The service URL.
 ##### statusCode
 
 The expected status code response.
+
 ```xml
    <statusCode>200</statusCode>
 ```
@@ -152,7 +172,8 @@ The expected status code response.
 ##### priority
 
 Defines the order in which the connection will be attempted across tcpConnection and httpConnection. The 0 value is the highest priority.
-By default, if not defined, the priority is the lowest (Integer.MAX_VALUE). 
+By default, if not defined, the priority is the lowest (Integer.MAX_VALUE).
+
 ```xml
     <priority>100</priority>
 ```
@@ -215,7 +236,7 @@ Wait for a docker container startup and service up with docker-compose-maven-plu
                     </httpConnections>
                 </configuration>
             </plugin>
-        </plugins> 
+        </plugins>
  </build>
- 
- ```
+
+```

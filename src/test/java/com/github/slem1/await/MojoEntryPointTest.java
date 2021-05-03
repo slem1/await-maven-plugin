@@ -23,7 +23,7 @@ import org.mockito.Mockito;
 @RunWith(JUnit4.class)
 public class MojoEntryPointTest {
 
-    private static final PollingConfig POLLING_TEST_CONFIG = new PollingConfig(3, 1);
+    private static final PollingConfig POLLING_TEST_CONFIG = new PollingConfig(3, 1, true);
 
     private MojoEntryPoint mojoEntryPoint;
 

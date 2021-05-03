@@ -108,7 +108,7 @@ public class MojoEntryPoint extends AbstractMojo {
             Service service = config.buildService();
             PollingTask task = new PollingTask(service,
                     pollingConfig.getAttempts(),
-                    pollingConfig.getSleep(), config.getPriority());
+                    pollingConfig.getSleep(), config.getPriority(), pollingConfig.isThrowOnFail());
             pollingTasks.add(task);
         }
 
