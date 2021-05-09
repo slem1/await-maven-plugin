@@ -11,6 +11,7 @@ public class PollingConfig {
 
     private int sleep = 1000;
 
+    private boolean throwOnFail = true;
     /**
      * Default constructor used by maven
      */
@@ -23,11 +24,14 @@ public class PollingConfig {
      *
      * @param attempts the max number of connection attempts.
      * @param sleep    the waiting time in ms.
+     * @param throwOnFail true to throw if all attempts are unsuccessfull, false will just log it 
+     * 
      */
-    public PollingConfig(int attempts, int sleep) {
+    public PollingConfig(int attempts, int sleep, boolean throwOnFail) {
         validate(attempts, sleep);
         this.attempts = attempts;
         this.sleep = sleep;
+        this.throwOnFail = throwOnFail;
     }
 
     /**
@@ -46,6 +50,15 @@ public class PollingConfig {
      */
     public int getSleep() {
         return sleep;
+    }
+
+    /**
+     * Return if we should throw exception when all attempts fail.
+     *
+     * @return true if we should throw exception
+     */
+    public boolean isThrowOnFail() {
+        return throwOnFail;
     }
 
     /**
