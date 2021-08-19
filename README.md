@@ -142,6 +142,11 @@ The service URL.
   <url>http://mywebservice:9090</url>
 ```
 
+The service URL can include basic auth information when running on http
+```xml
+  <url>http://user:pass@mywebservice:9090</url>
+```
+
 ##### statusCode
 
 The expected status code response.
