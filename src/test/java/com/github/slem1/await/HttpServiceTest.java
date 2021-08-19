@@ -68,7 +68,6 @@ public class HttpServiceTest {
         httpService.execute();
     }
 
-
     @Test(expected = ServiceUnavailableException.class)
     public void shouldThrowServiceUnavailableException_HTTP() throws IOException, ServiceUnavailableException {
         URL url = Mockito.mock(URL.class);

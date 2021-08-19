@@ -183,7 +183,6 @@
             </plugin>
         </plugins>
     </build>
-    
     <licenses>
         <license>
             <name>MIT License</name>
