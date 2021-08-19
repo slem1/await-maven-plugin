@@ -12,6 +12,8 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 
+import static org.mockito.ArgumentMatchers.eq;
+import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.when;
 
 @RunWith(JUnit4.class)
@@ -26,6 +28,22 @@ public class HttpServiceTest {
         when(url.getProtocol()).thenReturn("http");
         HttpService httpService = new HttpService(url, 200, false);
         httpService.execute();
+    }
+
+    @Test
+    public void shouldConnectAndGet200_HTTP_With_AuthInfo() throws IOException, ServiceUnavailableException {
+        String authInfo = "user:pass";
+        String expectedPropertyKey = "Authorization";
+        String expectedPropertyValue = "Basic dXNlcjpwYXNz";
+        URL url = Mockito.mock(URL.class);
+        HttpURLConnection urlConnection = Mockito.mock(HttpURLConnection.class);
+        when(urlConnection.getResponseCode()).thenReturn(200);
+        when(url.openConnection()).thenReturn(urlConnection);
+        when(url.getProtocol()).thenReturn("http");
+        when(url.getUserInfo()).thenReturn(authInfo);
+        HttpService httpService = new HttpService(url, 200, false);
+        httpService.execute();
+        Mockito.verify(urlConnection, times(1)).setRequestProperty(eq(expectedPropertyKey), eq(expectedPropertyValue));
     }
 
     @Test
@@ -49,6 +67,7 @@ public class HttpServiceTest {
         HttpService httpService = new HttpService(url, 200, false);
         httpService.execute();
     }
+
 
     @Test(expected = ServiceUnavailableException.class)
     public void shouldThrowServiceUnavailableException_HTTP() throws IOException, ServiceUnavailableException {
