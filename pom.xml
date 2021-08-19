@@ -6,7 +6,7 @@
 
     <groupId>com.github.slem1</groupId>
     <artifactId>await-maven-plugin</artifactId>
-    <version>1.2.2</version>
+    <version>1.2.1</version>
 
     <packaging>maven-plugin</packaging>
 
