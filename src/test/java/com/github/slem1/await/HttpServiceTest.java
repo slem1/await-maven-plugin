@@ -30,6 +30,22 @@ public class HttpServiceTest {
     }
 
     @Test
+    public void shouldConnectAndGet200_HTTP_With_AuthInfo() throws IOException, ServiceUnavailableException {
+        String authInfo = "user:pass";
+        String expectedPropertyKey = "Authorization";
+        String expectedPropertyValue = "Basic dXNlcjpwYXNz";
+        URL url = Mockito.mock(URL.class);
+        HttpURLConnection urlConnection = Mockito.mock(HttpURLConnection.class);
+        when(urlConnection.getResponseCode()).thenReturn(200);
+        when(url.openConnection()).thenReturn(urlConnection);
+        when(url.getProtocol()).thenReturn("http");
+        when(url.getUserInfo()).thenReturn(authInfo);
+        HttpService httpService = new HttpService(url, 200, false);
+        httpService.execute();
+        Mockito.verify(urlConnection, times(1)).setRequestProperty(eq(expectedPropertyKey), eq(expectedPropertyValue));
+    }
+
+    @Test
     public void shouldConnectAndGet200_HTTPS_Skip_SSLCertVerification() throws IOException, ServiceUnavailableException {
         URL url = Mockito.mock(URL.class);
         HttpsURLConnection urlConnection = Mockito.mock(HttpsURLConnection.class);
