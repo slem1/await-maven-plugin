@@ -13,7 +13,7 @@ await-maven-plugin is a plugin to pause maven build until some service is availa
             <plugin>
                 <groupId>com.github.slem1</groupId>
                 <artifactId>await-maven-plugin</artifactId>
-                <version>1.2</version>
+                <version>1.2.2</version>
                 <executions>
                     <execution>
                         <phase>process-test-classes</phase>
