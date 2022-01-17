@@ -1,12 +1,12 @@
 package com.github.slem1.await;
 
+import java.net.MalformedURLException;
+import java.net.URL;
+
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.JUnit4;
-
-import java.net.MalformedURLException;
-import java.net.URL;
 
 @RunWith(JUnit4.class)
 public class HttpConnectionConfigTest {

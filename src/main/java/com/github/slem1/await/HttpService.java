@@ -7,8 +7,10 @@ import javax.net.ssl.X509TrustManager;
 import java.io.IOException;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.nio.charset.StandardCharsets;
 import java.security.KeyManagementException;
 import java.security.NoSuchAlgorithmException;
+import java.util.Base64;
 
 /**
  * Handler for testing connection to remote service on http.
@@ -52,6 +54,7 @@ public class HttpService implements Service {
      *
      * @param url        the url of the service to connect to.
      * @param statusCode the expected http response status code.
+     * @param skipSSLCertVerification true if you want to skip SSL certificate verification.
      */
     public HttpService(URL url, Integer statusCode, boolean skipSSLCertVerification) {
 
@@ -86,8 +89,16 @@ public class HttpService implements Service {
                 }
             } else {
                 urlConnection = (HttpURLConnection) url.openConnection();
-                urlConnection.setRequestProperty("method", "GET");
             }
+
+            urlConnection.setRequestProperty("method", "GET");
+            if (null != url.getUserInfo()) {
+                urlConnection.setRequestProperty("Authorization",
+                        String.format("Basic %s", Base64.getEncoder().encodeToString(
+                                url.getUserInfo().getBytes(StandardCharsets.UTF_8)
+                        )));
+            }
+
             urlConnection.connect();
 
             if (urlConnection.getResponseCode() != statusCode) {

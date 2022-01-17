@@ -1,5 +1,15 @@
 package com.github.slem1.await;
 
+import static org.mockito.Mockito.doThrow;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
+
+import java.lang.reflect.Field;
+import java.util.Arrays;
+import java.util.Collections;
+
 import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugin.MojoFailureException;
 import org.junit.Assert;
@@ -10,20 +20,10 @@ import org.junit.runners.JUnit4;
 import org.mockito.InOrder;
 import org.mockito.Mockito;
 
-import java.lang.reflect.Field;
-import java.util.Arrays;
-import java.util.Collections;
-
-import static org.mockito.Mockito.doThrow;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.times;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
-
 @RunWith(JUnit4.class)
 public class MojoEntryPointTest {
 
-    private static final PollingConfig POLLING_TEST_CONFIG = new PollingConfig(3, 1);
+    private static final PollingConfig POLLING_TEST_CONFIG = new PollingConfig(3, 1, true);
 
     private MojoEntryPoint mojoEntryPoint;
 
