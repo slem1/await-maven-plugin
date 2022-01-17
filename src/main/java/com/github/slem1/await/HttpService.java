@@ -7,6 +7,7 @@ import java.net.URL;
 import java.nio.charset.StandardCharsets;
 import java.security.KeyManagementException;
 import java.security.NoSuchAlgorithmException;
+import java.util.Base64;
 
 import javax.net.ssl.HttpsURLConnection;
 import javax.net.ssl.SSLContext;
@@ -90,14 +91,17 @@ public class HttpService implements Service {
                 }
             } else {
                 urlConnection = (HttpURLConnection) url.openConnection();
-                urlConnection.setRequestProperty("method", "GET");
-                if(null != url.getUserInfo()){
-                    urlConnection.setRequestProperty("Authorization",
-                        String.format("Basic %s", DatatypeConverter.printBase64Binary(
-                            url.getUserInfo().getBytes(StandardCharsets.UTF_8)
-                    )));
+            }
+
+            urlConnection.setRequestProperty("method", "GET");
+            if(null != url.getUserInfo()){
+                urlConnection.setRequestProperty("Authorization",
+                        String.format("Basic %s", Base64.getEncoder().encodeToString(
+                                url.getUserInfo().getBytes(StandardCharsets.UTF_8)
+                        )));
                 }
             }
+
             urlConnection.connect();
 
             if (urlConnection.getResponseCode() != statusCode) {
