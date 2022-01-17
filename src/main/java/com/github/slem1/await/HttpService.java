@@ -1,6 +1,9 @@
 package com.github.slem1.await;
 
-import javax.xml.bind.DatatypeConverter;
+import javax.net.ssl.HttpsURLConnection;
+import javax.net.ssl.SSLContext;
+import javax.net.ssl.TrustManager;
+import javax.net.ssl.X509TrustManager;
 import java.io.IOException;
 import java.net.HttpURLConnection;
 import java.net.URL;
@@ -8,11 +11,6 @@ import java.nio.charset.StandardCharsets;
 import java.security.KeyManagementException;
 import java.security.NoSuchAlgorithmException;
 import java.util.Base64;
-
-import javax.net.ssl.HttpsURLConnection;
-import javax.net.ssl.SSLContext;
-import javax.net.ssl.TrustManager;
-import javax.net.ssl.X509TrustManager;
 
 /**
  * Handler for testing connection to remote service on http.
@@ -94,12 +92,11 @@ public class HttpService implements Service {
             }
 
             urlConnection.setRequestProperty("method", "GET");
-            if(null != url.getUserInfo()){
+            if (null != url.getUserInfo()) {
                 urlConnection.setRequestProperty("Authorization",
                         String.format("Basic %s", Base64.getEncoder().encodeToString(
                                 url.getUserInfo().getBytes(StandardCharsets.UTF_8)
                         )));
-                }
             }
 
             urlConnection.connect();

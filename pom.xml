@@ -26,7 +26,6 @@
         <maven-gpg-plugin.version>1.5</maven-gpg-plugin.version>
         <coveralls-maven-plugin.version>4.3.0</coveralls-maven-plugin.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <jaxb-api.version>2.1.9</jaxb-api.version>
     </properties>
 
     <scm>
@@ -48,12 +47,6 @@
             <groupId>org.apache.maven</groupId>
             <artifactId>maven-plugin-api</artifactId>
             <version>${maven-plugin-api.version}</version>
-        </dependency>
-
-        <dependency>
-            <groupId>sun-jaxb</groupId>
-            <artifactId>jaxb-api</artifactId>
-            <version>${jaxb-api.version}</version>
         </dependency>
 
         <dependency>

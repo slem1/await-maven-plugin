@@ -1,5 +1,7 @@
 package com.github.slem1.await;
 
+import static org.mockito.ArgumentMatchers.eq;
+import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.when;
 
 import java.io.IOException;
